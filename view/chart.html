@@ -1,0 +1,36 @@
+#-*- coding: utf-8 -*-
+
+<%inherit file="templates/base.html"/>
+
+<%block name="header">
+  <%include file="header.html"/>
+</%block>
+
+<%block name="content">
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+  <script>
+     google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(dibujarGrafico);
+     function dibujarGrafico() {
+       var data = google.visualization.arrayToDataTable([
+         ['Texto', 'Valor'],
+         ['Texto1', 20.21],
+         ['Texto2', 4.28],
+         ['Texto3', 17.26],
+         ['Texto4', 10.25]    
+       ]);
+       var options = {
+         title: 'Diagrama DAI'
+       }
+       new google.visualization.ColumnChart( 
+         document.getElementById('GraficoGoogleChart')
+       ).draw(data, options);
+     }
+   </script> 
+  <div id="GraficoGoogleChart" style="width: 800px; height: 600px">
+  </div>
+</%block>
+
+<%block name="footer">
+  <%include file="footer.html"/>
+</%block>

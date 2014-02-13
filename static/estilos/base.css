@@ -1,0 +1,74 @@
+html,body {
+	padding-top: 60px;
+	height: 100%;
+}
+
+.navbar {
+	background-color: black;
+}
+
+.titulo {
+	color: orange;
+}
+
+.seccion {
+	margin-top: 10px;
+}
+
+.icono {
+	height: 50px;
+	padding: 0 0 0 0;
+	margin-top: -12px;
+}
+
+.content {
+	min-height: 600px;
+	height: auto;
+	margin: 0 auto -100px;
+	padding: 0 0 60px;
+}
+
+.TituloFormulario {
+	margin-left: 15px;
+	font-size: 35px;
+	font-variant: small-caps;
+}
+
+.error {
+	font-family: monospace;
+	color: red;
+	text-decoration: blink;
+}
+
+.wrong {
+	font-style: oblique;
+	color: rgb(169, 54, 56);
+	background-color: rgb(238, 214, 214);
+}
+
+.bienvenido {
+	font-size: 10px;
+	color: orange;
+}
+
+.navbar-right {
+	color: white;
+	float:left;
+}
+
+.footer {
+	background-color: black;
+	height: 100px;
+	padding-top: 15px;
+
+} 
+
+.wrap { 
+	min-height: 100%;
+} 
+
+.main { 
+	overflow: auto; 
+	padding-bottom: 100px; 
+	text-align: center; 
+}

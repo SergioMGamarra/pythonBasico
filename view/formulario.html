@@ -1,0 +1,67 @@
+## -*- coding: utf-8 -*-
+
+<%inherit file="templates/base.html"/>
+
+<%block name="header">
+	<%include file="header.html"/>
+</%block>
+<%block name="content">
+
+<div class="content wrap">
+<div class="main">
+	% if Accepted==False:			
+		<div class="alert alert-danger fade in">
+	        <button type="button" class="close" data-dismiss="alert"aria-hidden="true">×</button>
+	        <strong>Error, formulario no válido</strong>
+      	</div>
+      % elif Accepted==True:
+      		<div class="alert alert-success fade in">
+	        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+	        	<strong>Datos introducidos correctamente</strong>
+      		</div>
+      	% endif
+      	
+      	<div class="col-md-3">
+        % if Error:
+      <div class="alert alert-danger fade in">
+          <button type="button" class="close" data-dismiss="alert"aria-hidden="true">×</button>
+          <strong>${Error}</strong>
+        </div>        
+        % endif
+            <div class="list-group">
+              <a href="/" class="list-group-item active">${ultimaVisita}</a>
+              % if penultimaVisita != '':
+                  %if penultimaVisita == 'Inicio':
+                    <a href="/" class="list-group-item">${penultimaVisita}</a>
+                  %elif penultimaVisita == 'Formulario':
+                    <a href="/formulario" class="list-group-item">${penultimaVisita}</a>
+                  %elif penultimaVisita == 'Datos':
+                    <a href="/user_data" class= "list-group-item">${penultimaVisita}</a>
+
+                  % endif
+              % endif
+              % if antepenultimaVisita != '':
+                  %if antepenultimaVisita == 'Inicio':
+                    <a href="/" class="list-group-item">${antepenultimaVisita}</a>
+                  %elif antepenultimaVisita == 'Formulario':
+                    <a href="/formulario" class="list-group-item">${antepenultimaVisita}</a>
+                  %elif antepenultimaVisita == 'Datos':
+                    <a href="/user_data" class= "list-group-item">${antepenultimaVisita}</a>
+                  % endif
+              % endif             
+            </div>
+        </div>
+        <div class="col-md-8">
+			     <p class="TituloFormulario">Formulario de inscricpión</p>
+           <form class="formulario" action="/formulario" method="post" accept-charset="utf-8">
+    				${form.render()}
+  		  		<button type="submit" class="btn btn-success">Registrarse</button>
+	      	 </form>
+		  </div>
+    </div>
+	</div>
+
+</%block>
+<%block name="footer">
+	<%include file="footer.html"/>
+</%block>

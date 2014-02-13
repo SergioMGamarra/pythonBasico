@@ -1,0 +1,69 @@
+#-*- coding: utf-8 -*-
+
+<%inherit file="templates/base.html"/>
+
+<%block name="header">
+	<%include file="header.html"/>
+</%block>
+
+<%block name="content">
+<script type="text/javascript" src="/static/googleAPI/jsapi.js"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Autor', 'Nº de tweets'],
+      % for i in range(0,4):
+        <%
+          autor=users[i]
+        %>
+        ['${autor[0]}', ${autor[1]}],
+      % endfor
+    ]);
+
+    var options = {
+      legend: {position: 'none'},
+      hAxis: {title: 'Usuarios', titleTextStyle: {color: 'black'}},
+      vAxis: {title: 'Tweets', titleTextStyle: {color: 'black'}},
+      'width':600,
+      'height':400
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+    <div class="content wrap">
+		    <a href="https://twitter.com/SergioMGamarra" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @SergioMGamarra</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+          </script>
+      <div class="panel panel-default">
+        <div class="panel-heading">Actividad destacable últimos tweets de tu timeline</div>
+        <div class="panel-body">
+          <div id="chart_div"></div>
+        </div>
+      </div>
+        % if Timeline:
+          <br><h3>Timeline</h3><br>
+          <div class="list-group">
+          % for i in range(0,len(Timeline)):
+            <% 
+              tweet=Timeline[i]
+            %>            
+            % if i<40:
+              <div class="list-group-item">
+                <p>${tweet['fecha']}</p>
+                <h4 class="list-group-item-heading">${tweet['contenido']}</h4>
+                <p class="tweet-author">Usuario: @${tweet['usuario']}</p>
+              </div>
+            % endif       
+          % endfor
+      </div>    
+    % endif
+    </div>
+</%block>
+
+<%block name="footer">
+	<%include file="footer.html"/>
+</%block>
